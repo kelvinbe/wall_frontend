@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import './App.css';
+import 'antd/dist/antd.css'; 
 import CustomLayout from './containers/Layout';
+import MessageList from './containers/MessageListView';
 
 class App extends Component {
   render(){
@@ -9,7 +9,9 @@ class App extends Component {
     return (
       <div className="App">
       <CustomLayout>
-        
+
+        <MessageList />
+
       </CustomLayout>
       </div>
     );
