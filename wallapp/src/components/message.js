@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Avatar} from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import { MessageOutlined, LikeOutlined, StarOutlined , FieldTimeOutlined} from '@ant-design/icons';
 
 
 
@@ -26,7 +26,7 @@ const Messages = (props) => {
     dataSource={props.data}
     footer={
       <div>
-        <b>ant design</b> footer part
+        <b>Wall application</b>
       </div>
     }
     renderItem={item => (
@@ -36,6 +36,8 @@ const Messages = (props) => {
           <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
           <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
           <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+          <IconText icon={FieldTimeOutlined} text="2" key="list-vertical-message" />,
+
         ]}
         extra={
           <img
