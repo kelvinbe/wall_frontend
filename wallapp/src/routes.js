@@ -1,17 +1,19 @@
-import { React } from 'react';
-import { Route } from 'react-router-dom'
-import MessageList from './containers/MessageListView';
+import React  from 'react';
+import  {Route}  from 'react-router-dom/Route'
+import MessageList from '../src/containers/MessageListView';
 
 
-const BaseRouter = () => (
+export const BaseRouter = () => { 
+    return( 
+
     <div>
         <Route  exact path='/' component={MessageList}/>
-        <Route  exact path='/:messageID' component={MessageList}/>
 
     </div>
 
 );
-
+}
 export default BaseRouter;
+
 
 
