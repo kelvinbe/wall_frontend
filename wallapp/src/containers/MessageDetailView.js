@@ -12,7 +12,6 @@ class MessageDetail extends React.Component {
     state = {
         message: {}
     }
-
     componentDidMount(){
         const messageID = this.props.match.params.messageID;
         axios.get(`http://127.0.0.1:8000/message/${messageID}/`)
@@ -20,12 +19,10 @@ class MessageDetail extends React.Component {
                 this.setState({
                     message: res.data
                 });
-                
-
-
             })
-
     }
+
+    
 
 
 

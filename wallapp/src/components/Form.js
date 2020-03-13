@@ -2,31 +2,33 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 
 import axios from 'axios';
-
 const FormItem = Form.Item;
 
 class CustomForm extends React.Component {
 
     handleFormSubmit = (event, requestType, messageID) => {
         const title = event.target.elements.title.value;
-        const content = event.target.elements.content.value;
+        const description = event.target.elements.description.value;
 
-            // eslint-disable-next-line default-case
             switch ( requestType ) {
+
                 case 'post':
-                    return axios.post('http://127.0.0.1:8000/api/', {
+                    return axios.post('http://127.0.0.1:8000/message/', {
                         title: title,
-                        content: content
+                        description: description
                     })
                     .then(res => console.log(res))
-                    .catch(error => console.err(error));
+                    .catch(error => console.error(error))
+
                 case 'put':
-                    return axios.put(`http://127.0.0.1:8000/api/${messageID}/`, {
+                    return axios.post(`http://127.0.0.1:8000/message/${messageID}`, {
                         title: title,
-                        content: content
+                        description: description
                     })
                     .then(res => console.log(res))
-                    .catch(error => console.err(error));
+                    .catch(error => console.error(error))
+
+
             }
         }
 
@@ -34,17 +36,16 @@ class CustomForm extends React.Component {
         return (
         <div>
             <Form onSubmit={(event) => this.handleFormSubmit(
-                event,
-                this.props.requestType,
-                this.props.messageID )}>
+                event, this.props.requestType,
+                this.props.messageID)}>
             <FormItem label="Title" >
                 <Input name="title" placeholder="Put a title here" />
             </FormItem>
-            <FormItem label="Content" >
-                <Input name="content" placeholder="Enter some content ..." />
+            <FormItem label="Description" >
+                <Input name="description" placeholder="Enter some content ..." />
             </FormItem>
             <FormItem>
-                <Button type="primary" htmlType="submit">{this.props.btnText}</Button>
+            <Button type="primary" htmlType="submit">{this.props.btnText}</Button>
             </FormItem>
             </Form>
         </div>
