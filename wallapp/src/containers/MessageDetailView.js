@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios'
 import { Card } from 'antd'
 
+import CustomForm from '../components/Form'
+
+
 
 
 class MessageDetail extends React.Component {
@@ -17,7 +20,7 @@ class MessageDetail extends React.Component {
                 this.setState({
                     message: res.data
                 });
-                console.log(res.data);
+                
 
 
             })
@@ -28,6 +31,7 @@ class MessageDetail extends React.Component {
 
     render() {
         return (
+            <div>
            <Card title={this.state.message.title}>
                <p>
                    {this.state.message.description}
@@ -39,6 +43,11 @@ class MessageDetail extends React.Component {
                </p>
 
            </Card>
+           <br/>
+           <CustomForm requestType = "put"
+           messageID={this.props.match.params.messageID}
+           btnText="Edit"/>
+           </div>
         )
     }
 }
