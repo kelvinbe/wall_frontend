@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-import { Card } from 'antd'
+import { Button, Card } from 'antd'
 
 import CustomForm from '../components/Form'
 
@@ -22,10 +22,13 @@ class MessageDetail extends React.Component {
             })
     }
 
-    
+    handleDelete = (event) => {
 
+        const messageID = this.props.match.params.messageID;
+        axios.delete(`http://127.0.0.1:8000/message/${messageID}`);
+        this.props.history.push('/')
 
-
+    }
     render() {
         return (
             <div>
@@ -44,6 +47,12 @@ class MessageDetail extends React.Component {
            <CustomForm requestType = "put"
            messageID={this.props.match.params.messageID}
            btnText="Edit"/>
+
+<form onSubmit = {this.handleDelete}>
+                    <Button type="danger" htmlType="submit">
+                       Delete
+                    </Button>
+                </form>
            </div>
         )
     }

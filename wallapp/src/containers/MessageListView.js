@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Message from '../components/message';
 import CustomForm from '../components/Form';
+import { Button } from 'antd';
 
 class MessageList extends React.Component {
 
@@ -19,6 +20,8 @@ class MessageList extends React.Component {
             })
     }
 
+    
+
     render() {
         return (
             <div>
@@ -29,6 +32,8 @@ class MessageList extends React.Component {
                 requestType = "post"
                 messageID = {null}
                 btnText="Post"/>
+
+                
             </div>
         )
     }

@@ -10,6 +10,7 @@ class CustomForm extends React.Component {
         const title = event.target.elements.title.value;
         const description = event.target.elements.description.value;
 
+            // eslint-disable-next-line default-case
             switch ( requestType ) {
 
                 case 'post':
