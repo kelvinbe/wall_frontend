@@ -9,10 +9,9 @@ export const authStart = () => {
 }
 
 
-export const authFail = () => {
+export const authFail = error => {
     return {
         type: actionTypes.AUTH_FAIL,
-        // eslint-disable-next-line no-undef
         error: error
     }
 }
@@ -62,10 +61,35 @@ export const authLogin = (username, password, email) => {
 
         })
         .catch(err => {
+            // eslint-disable-next-line no-undef
             dispatch(authFail(err))
         })
 
        
+    }
+}
+
+
+export const authRegister = (username, email, password, confirm) => {
+    return dispatch => {
+        dispatch(authStart());
+        axios.post('http://127.0.0.1:8000/register', {
+            username: username,
+            email: email,
+            password: password,
+            confirm: confirm
+        })
+        .then(res => {
+            const token = res.data.key;
+            const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+            localStorage.setItem('token', token);
+            localStorage.setItem('expirationDate', expirationDate);
+            dispatch(authSuccess(token));
+            dispatch(checkAuthTimeout(3600));
+        })
+        .catch(err => {
+            dispatch(authFail(err))
+        })
     }
 }
 
