@@ -19,7 +19,7 @@ class RegistrationForm extends React.Component {
           values.userName,
           values.email,
           values.password,
-          values.confirm
+          values.confirm_password
         );
         this.props.history.push("/");
       }
@@ -105,7 +105,7 @@ class RegistrationForm extends React.Component {
         </FormItem>
 
         <FormItem>
-          {getFieldDecorator("confirm", {
+          {getFieldDecorator("confirm_password", {
             rules: [
               {
                 required: true,
@@ -119,7 +119,7 @@ class RegistrationForm extends React.Component {
             <Input
               prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
               type="password"
-              placeholder="Confirm Password"
+              placeholder="Confirm_Password"
               onBlur={this.handleConfirmBlur}
             />
           )}
@@ -155,8 +155,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (username, email, password, confirm) =>
-      dispatch(actions.authRegister(username, email, password, confirm))
+    onAuth: (username, email, password, confirm_password) =>
+      dispatch(actions.authRegister(username, email, password, confirm_password))
   };
 };
 
