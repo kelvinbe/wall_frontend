@@ -64,20 +64,6 @@ class NormalLoginForm extends React.Component {
             </FormItem>
 
             <FormItem>
-              {getFieldDecorator("email", {
-                rules: [{ required: true, message: "Please input your Email!" }]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
-                  type="email"
-                  placeholder="Email"
-                />
-              )}
-            </FormItem>
-
-            <FormItem>
               <Button
                 type="primary"
                 htmlType="submit"

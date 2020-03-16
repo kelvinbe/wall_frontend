@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import Message from '../components/message';
 import CustomForm from '../components/Form';
-import { Button } from 'antd';
 
 class MessageList extends React.Component {
 
