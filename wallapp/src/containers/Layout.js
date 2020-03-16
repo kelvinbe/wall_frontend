@@ -34,6 +34,8 @@ class CustomLayout extends React.Component {
             </Menu.Item>
           </Menu>
         </Header>
+        <h1 style={{textAlign:"center", color: "#0989f9", fontFamily: "Roboto"}} >THE WALL</h1>
+
         <Content style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>
