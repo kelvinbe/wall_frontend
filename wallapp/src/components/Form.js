@@ -1,49 +1,43 @@
 import React from 'react';
+import { connect } from "react-redux";
+
 
 import axios from 'axios';
 
 class CustomForm extends React.Component {
 
-    handleFormSubmit = (event, requestType, messageID) => {
-        const title = event.target.elements.title.value;
-        const description = event.target.elements.description.value;
-
-        console.log(title, description )
-
-
-    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-    axios.defaults.xsrfCookieName = "csrftoken";
-    axios.defaults.headers = {
-      "Content-Type": "application/json",
-      Authorization: `Token ${this.props.token}`,
-    };
-
-            // eslint-disable-next-line default-case
-            switch ( requestType ) {
-
-                case 'post':
-                    return axios.post('http://127.0.0.1:8000/message', {
-                        title: title,
-                        description: description,
-
-                       
-
-                    }
-                    )
-                    .then(res => console.log(res))
-                    .catch(error => console.error(error))
-
-                case 'put':
-                    return axios.post(`http://127.0.0.1:8000/message/${messageID}`, {
-                        title: title,
-                        description: description
-                    })
-                    .then(res => console.log(res))
-                    .catch(error => console.error(error))
-
-
-            }
+    handleFormSubmit = async (event, requestType, articleID) => {
+        event.preventDefault();
+    
+        const postObj = {
+          title: event.target.elements.title.value,
+          description: event.target.elements.description.value
+    
         }
+    
+        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+        axios.defaults.xsrfCookieName = "csrftoken";
+        axios.defaults.headers = {
+          "Content-Type": "application/json",
+          Authorization: `Token ${this.props.token}`,
+        };
+        
+        if (requestType === "post") {
+          await axios.post("http://127.0.0.1:8000/message/", postObj)
+            .then(res => {
+              if (res.status === 201) {
+                  console.log(res.data)
+              }
+            })
+        } else if (requestType === "put") {
+          await axios.put(`http://127.0.0.1:8000/message/${articleID}`, postObj)
+            .then(res => {
+              if (res.status === 200) {
+                console.log(res.data)
+              }
+            })
+        }
+      };
 
     render() {
         return (
@@ -73,4 +67,10 @@ class CustomForm extends React.Component {
     }
 }
 
-export default CustomForm;
+const mapStateToProps = state => {
+    return {
+      token: state.token
+    };
+  };
+  
+  export default connect(mapStateToProps)(CustomForm);

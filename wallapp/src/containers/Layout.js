@@ -1,10 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch,Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch,Link, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/auth";
 import MessageList from "../containers/MessageListView";
 import MessageDetail from "./MessageDetailView";
 import Login from "./Login";
+
 
 
 class CustomLayout extends React.Component {
@@ -17,7 +18,7 @@ class CustomLayout extends React.Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-                <Link to={'/'} className="nav-link"></Link>
+                <Link to={'/message'} className="nav-link"></Link>
               </li>
               <li className="nav-item">
                 <Link to={'/message'} className="nav-link">Messages</Link>
@@ -46,4 +47,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null,mapDispatchToProps)(CustomLayout);
+export default withRouter(connect(null,mapDispatchToProps)(CustomLayout));
