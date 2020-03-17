@@ -6,7 +6,7 @@ import axios from 'axios';
 
 class CustomForm extends React.Component {
 
-    handleFormSubmit = async (event, requestType, articleID) => {
+    handleFormSubmit = async (event, requestType, messageID) => {
         event.preventDefault();
     
         const postObj = {
@@ -30,7 +30,7 @@ class CustomForm extends React.Component {
               }
             })
         } else if (requestType === "put") {
-          await axios.put(`http://127.0.0.1:8000/message/${articleID}`, postObj)
+          await axios.put(`http://127.0.0.1:8000/message/${messageID}`, postObj)
             .then(res => {
               if (res.status === 200) {
                 console.log(res.data)

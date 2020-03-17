@@ -5,6 +5,7 @@ import * as actions from "../store/actions/auth";
 import MessageList from "../containers/MessageListView";
 import MessageDetail from "./MessageDetailView";
 import Login from "./Login";
+import RegistrationForm from "./Register";
 
 
 
@@ -34,6 +35,7 @@ class CustomLayout extends React.Component {
         <Route exact path='/message' component={ MessageList } />
               <Route path='/edit/:id' component={ MessageDetail } />
               <Route path='/login' component={ Login } />
+              <Route path='/register' component={ RegistrationForm } />
         </Switch>
       </div>
     </Router>
