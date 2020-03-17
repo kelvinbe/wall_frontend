@@ -24,9 +24,21 @@ class CustomLayout extends React.Component {
               <li className="nav-item">
                 <Link to={'/message'} className="nav-link">Messages</Link>
               </li>
+             
+              {
+                this.props.isAuthenticated ?
+
+                <li className="nav-item">
+                <Link onClick={this.props.logout} to={'/'} className="nav-link">logout</Link>
+              </li>
+
+              :
+
               <li className="nav-item">
                 <Link to={'/login'} className="nav-link">Login</Link>
               </li>
+
+              }
             </ul>
           </div>
         </nav> <br/>
@@ -36,6 +48,8 @@ class CustomLayout extends React.Component {
               <Route path='/edit/:id' component={ MessageDetail } />
               <Route path='/login' component={ Login } />
               <Route path='/register' component={ RegistrationForm } />
+
+             
         </Switch>
       </div>
     </Router>

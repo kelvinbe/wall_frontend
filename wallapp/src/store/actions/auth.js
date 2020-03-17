@@ -72,14 +72,13 @@ export const authLogin = (username, password, email, token) => {
 }
 
 
-export const authRegister = (username, email, password, confirm_password) => {
+export const authRegister = (username, email, password) => {
     return dispatch => {
         dispatch(authStart());
         axios.post('http://127.0.0.1:8000/register', {
             username: username,
             email: email,
             password: password,
-            confirm_password: confirm_password
         })
         .then(res => {
             const token = res.data.key;
