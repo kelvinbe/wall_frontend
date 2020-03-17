@@ -42,16 +42,18 @@ export const checkAuthTimeout = expirationTime => {
 }
 
 
-export const authLogin = (username, password, email) => {
+export const authLogin = (username, password, email, token) => {
     return dispatch => {
         dispatch(authStart());
         axios.post('http://127.0.0.1:8000/login', {
             username: username,
             password: password,
-            email: email
+            email: email,
+            token: token
         })
         .then(res => {
-            const token = res.data.key;
+            const token = res.data.token;
+            console.log('user_token: ', token)
             const expirationDate = new Date(new Date().getDate() + 3600 * 1000);
             localStorage.setItem('token', token);
             localStorage.setItem('expirationDate', expirationDate);
@@ -70,14 +72,13 @@ export const authLogin = (username, password, email) => {
 }
 
 
-export const authRegister = (username, email, password, confirm_password) => {
+export const authRegister = (username, email, password) => {
     return dispatch => {
         dispatch(authStart());
         axios.post('http://127.0.0.1:8000/register', {
             username: username,
             email: email,
             password: password,
-            confirm_password: confirm_password
         })
         .then(res => {
             const token = res.data.key;

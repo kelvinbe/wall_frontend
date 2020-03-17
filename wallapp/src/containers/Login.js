@@ -1,106 +1,121 @@
 import React from "react";
-import { Form, Icon, Input, Button, Spin } from "antd";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 import * as actions from "../store/actions/auth";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+import {authLogin} from '../store/actions/auth'
 
-const FormItem = Form.Item;
-const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
-class NormalLoginForm extends React.Component {
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        this.props.onAuth(values.userName, values.password, values.email);
-        this.props.history.push("/");
-      }
-    });
+
+
+class LoginForm extends React.Component {
+  state = {
+    username: "",
+    password: ""
   };
+  
+
+  static propTypes = {
+    authLogin: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+   this.props.authLogin(this.state.username, this.state.password)
+  };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+  
 
   render() {
-    let errorMessage = null;
-    if (this.props.error) {
-      errorMessage = <p>{this.props.error.message}</p>;
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/message" />;
     }
+  return (
+    <div>
+    <form onSubmit={this.onSubmit}>
+              <div className="form-group">
+                  <label>Username:  </label>
+                  <input name="username" className="form-control" required value={this.state.username}
+                        onChange={this.onChange}/>
+              </div>
+              <div className="form-group">
+                  <label>Passoword: </label>
+                  <input name="password" type="password" className="form-control" required value={this.state.password}
+                  
+                  onChange={this.onChange}/>
+              </div>
+              <div className="form-group">
+                  <input type="submit" value="Login" className="btn btn-primary"/>
+              </div>
 
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <div>
-        {errorMessage}
-        {this.props.loading ? (
-          <Spin indicator={antIcon} />
-        ) : (
-          <Form onSubmit={this.handleSubmit} className="login-form">
-            <FormItem>
-              {getFieldDecorator("userName", {
-                rules: [
-                  { required: true, message: "Please input your username!" }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
-                  placeholder="Username"
-                />
-              )}
-            </FormItem>
-
-            <FormItem>
-              {getFieldDecorator("password", {
-                rules: [
-                  { required: true, message: "Please input your Password!" }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
-                  type="password"
-                  placeholder="Password"
-                />
-              )}
-            </FormItem>
-
-            <FormItem>
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ marginRight: "10px" }}
-              >
-                Login
-              </Button>
-              or if you are not yet registered
-              <NavLink style={{ marginRight: "10px" }} to="/register/">
-                {" "}
-                register
-              </NavLink>
-            </FormItem>
-          </Form>
-        )}
+              <p>
+                
+                Don't have an account? <Link to="/register">
+                   Register</Link>
+              </p>
+          </form>
       </div>
-    );
+    )
+  };
   }
-}
 
-const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
-const mapStateToProps = state => {
-  return {
-    loading: state.loading,
-    error: state.error
+
+  const mapStateToProps = state => {
+    return {
+      loading: state.loading,
+      error: state.error,
+      isAuthenticated: state.isAuthenticated
+    };
   };
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onAuth: (username, password, email) =>
-      dispatch(actions.authLogin(username, password, email))
-  };
-};
+export default connect(mapStateToProps, {authLogin})(LoginForm);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WrappedNormalLoginForm);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

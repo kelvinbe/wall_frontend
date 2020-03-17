@@ -4,6 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import BaseRouter from './routes';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import CustomLayout from './containers/Layout';
 import * as actions from '../src/store/actions/auth'

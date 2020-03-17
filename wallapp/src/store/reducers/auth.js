@@ -5,7 +5,9 @@ import { authLogin } from '../actions/auth';
 const initialState = {
     token: null,
     error: null,
-    loading: false
+    loading: false,
+    isAuthenticated: false,
+    user: null
 }
 
 
@@ -13,6 +15,7 @@ const initialState = {
 const authStart = (state, action) => {
     return updateObject(state, {
         error: null,
+        isAuthenticated: false,
         loading: true
     })
 }
@@ -22,7 +25,9 @@ const authSuccess = (state, action) => {
     return updateObject(state, {
         token: action.token,
         error: null,
+        isAuthenticated: true,
         loading: false
+
     })
 }
 
@@ -40,6 +45,20 @@ const authLogout = (state, action) => {
     })
 }
 
+const userLoading = (state, action) => {
+    return updateObject(state, {
+        loading: true
+    })
+}
+
+const userLoaded = (state, action) => {
+    return updateObject(state, {
+        isAuthenticated: true,
+        isLoading: false,
+        user: action.payload
+    })
+}
+
 
 const reducer = (state=initialState, action) => {
     switch (action.type) {
@@ -48,6 +67,9 @@ const reducer = (state=initialState, action) => {
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_LOGIN: return authLogin(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
+        case actionTypes.USER_LOADING: return userLoading(state, action);
+        case actionTypes.USER_LOADED: return userLoaded(state, action);
+
         default:
             return state;
     }
