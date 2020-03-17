@@ -1,5 +1,10 @@
 import React from 'react';
 import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+
+
+
+
 
 
 import axios from 'axios';
@@ -9,6 +14,7 @@ class CustomForm extends React.Component {
     handleFormSubmit = async (event, requestType, messageID) => {
         event.preventDefault();
     
+
         const postObj = {
           title: event.target.elements.title.value,
           description: event.target.elements.description.value
@@ -23,10 +29,16 @@ class CustomForm extends React.Component {
         };
         
         if (requestType === "post") {
+          
           await axios.post("http://127.0.0.1:8000/message/", postObj)
             .then(res => {
               if (res.status === 201) {
-                  console.log(res.data)
+                  
+                console.log(alert("Your mesaage has been posted refresh and navigate to view it"))
+                return <Redirect to="/" />;
+              
+            
+                  
               }
             })
         } else if (requestType === "put") {
