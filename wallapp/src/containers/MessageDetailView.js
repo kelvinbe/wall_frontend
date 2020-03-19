@@ -26,7 +26,7 @@ class MessageDetail extends React.Component {
 
         const messageID = this.props.match.params.messageID;
         axios.delete(`http://127.0.0.1:8000/message/${messageID}`);
-        this.props.history.push('/')
+        this.props.history.push(`/message/${messageID}`)
 
     }
     render() {

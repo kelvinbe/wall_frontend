@@ -27,7 +27,7 @@ export class RegistrationForm extends Component {
               this.state.username,
               this.state.email,
               this.state.password,          );
-          this.props.history.push('/');
+          this.props.history.push('/messages/');
         }
       
     }
