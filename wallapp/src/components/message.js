@@ -27,11 +27,10 @@ const Message = (props) => {
             extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
         >
             <List.Item.Meta
-            avatar={<Avatar src={item.avatar} />}
             title={<a href={`/${item.id}`}>{item.title}</a>}
             description={item.description}
             />
-            {item.content}
+            {item.author}
         </List.Item>
         )}
     />
