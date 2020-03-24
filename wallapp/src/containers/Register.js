@@ -10,7 +10,6 @@ export class RegistrationForm extends Component {
     username: "",
     email: "",
     password: "",
-    password2: "",
   };
 
   static propTypes = {
