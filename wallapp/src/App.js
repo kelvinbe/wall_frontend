@@ -5,8 +5,6 @@ import BaseRouter from './routes';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 import CustomLayout from './containers/Layout';
 import * as actions from '../src/store/actions/auth'
 
@@ -16,6 +14,7 @@ class App extends Component {
     this.props.onTryAutoSignup();
   }
 
+  
   render() {
     return (
       <div>
@@ -36,9 +35,9 @@ const mapStateToProps = state => {
 }
 
 
-const mapDispatchToProps = dispacth => {
+const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispacth(actions.authCheckState())
+    onTryAutoSignup: () => dispatch(actions.authCheckState())
   }
 }
 

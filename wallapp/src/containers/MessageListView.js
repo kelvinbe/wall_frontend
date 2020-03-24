@@ -31,7 +31,7 @@ class MessageList extends React.Component {
     return (
       <div>
         <Message data={this.state.messages} /> <br />
-        <h2> Post a message </h2>
+         <h2> Post a message </h2>
         <CustomForm requestType="post" messageID={null} btnText="Create" />
       </div>
     );
