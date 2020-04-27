@@ -24,7 +24,7 @@ class CustomForm extends React.Component {
         if (res.status === 201) {
           console.log(
             alert(
-              "Your mesaage has been posted refresh and navigate to view it"
+              "Your message has been posted refresh and navigate to view it"
             )
           );
           return <Redirect to="/" />;

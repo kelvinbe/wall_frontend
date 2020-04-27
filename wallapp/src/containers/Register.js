@@ -97,3 +97,17 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { authRegister })(RegistrationForm);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,121 +1,93 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/auth";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import {authLogin} from '../store/actions/auth'
-
-
-
+import { authLogin } from "../store/actions/auth";
 
 class LoginForm extends React.Component {
   state = {
     username: "",
-    password: ""
+    password: "",
   };
-  
 
   static propTypes = {
     authLogin: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
   };
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
-   this.props.authLogin(this.state.username, this.state.password)
+    this.props.authLogin(this.state.username, this.state.password);
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
-
-  
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     if (this.props.isAuthenticated) {
       return <Redirect to="/message" />;
     }
-  return (
-    <div>
-    <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                  <label>Username:  </label>
-                  <input name="username" className="form-control" required value={this.state.username}
-                        onChange={this.onChange}/>
-              </div>
-              <div className="form-group">
-                  <label>Passoword: </label>
-                  <input name="password" type="password" className="form-control" required value={this.state.password}
-                  
-                  onChange={this.onChange}/>
-              </div>
-              <div className="form-group">
-                  <input type="submit" value="Login" className="btn btn-primary"/>
-              </div>
 
-              <p>
-                
-                Don't have an account? <Link to="/register">
-                   Register</Link>
-              </p>
-          </form>
+    return (
+      <div>
+        {
+
+      this.props.loading ?
+      
+      <div className="d-flex justify-content-center">
+      <div className="spinner-border" role="status">
+        <span className="sr-only">Loading...</span>
       </div>
-    )
-  };
+    </div>
+        
+        :
+
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label>Username: </label>
+            <input
+              name="username"
+              className="form-control"
+              required
+              value={this.state.username}
+              onChange={this.onChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Passoword: </label>
+            <input
+              name="password"
+              type="password"
+              className="form-control"
+              required
+              value={this.state.password}
+              onChange={this.onChange}
+            />
+          </div>
+          <div className="form-group">
+            <input type="submit" value="Login" className="btn btn-primary" />
+          </div>
+
+          <p>
+            Don't have an account? <Link to="/register">Register</Link>
+          </p>
+        </form>}
+      </div>
+    );
   }
+}
 
-
-
-  const mapStateToProps = state => {
-    return {
-      loading: state.loading,
-      error: state.error,
-      isAuthenticated: state.isAuthenticated
-    };
+const mapStateToProps = (state) => {
+  return {
+    loading: state.loading,
+    error: state.error,
+    isAuthenticated: state.isAuthenticated,
   };
-
-export default connect(mapStateToProps, {authLogin})(LoginForm);
-
+};
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default connect(mapStateToProps, { authLogin })(LoginForm);
