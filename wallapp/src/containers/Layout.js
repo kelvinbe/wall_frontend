@@ -16,10 +16,10 @@ class CustomLayout extends React.Component {
       <Router>
 
       <div className="container">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light ">
           <Link to={'/message'} className="navbar-brand">The Wall</Link>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
+          <div className="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+            <ul className="navbar-nav ml-auto">
             <li className="nav-item">
                 <Link to={'/message'} className="nav-link"></Link>
               </li>

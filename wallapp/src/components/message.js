@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, Avatar, Icon } from 'antd';
-import Messagee from './message.css'
 
 const IconText = ({ type, text }) => (
   <span>
