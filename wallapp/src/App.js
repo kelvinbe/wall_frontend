@@ -8,6 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CustomLayout from './containers/Layout';
 import * as actions from '../src/store/actions/auth'
 
+
+
+
+
 class App extends Component {
 
   componentDidMount() {
@@ -19,9 +23,7 @@ class App extends Component {
     return (
       <div>
         <Router>
-          <CustomLayout {...this.props}>
-              <BaseRouter />
-          </CustomLayout>
+          <CustomLayout {...this.props} />
         </Router>
       </div>
     );

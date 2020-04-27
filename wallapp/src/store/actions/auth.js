@@ -25,10 +25,12 @@ export const authSuccess = token => {
 
 
 export const logout = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
+
     return {
-        type: actionTypes.AUTH_LOGOUT
+        type: actionTypes.AUTH_LOGOUT,
+        isAuthenticated: false
     }
 }
 

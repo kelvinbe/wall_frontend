@@ -9,12 +9,14 @@ import RegistrationForm from "./Register";
 
 
 
+
 class CustomLayout extends React.Component {
   render() {
     return (
       <Router>
+
       <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <Link to={'/message'} className="navbar-brand">The Wall</Link>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
@@ -24,7 +26,7 @@ class CustomLayout extends React.Component {
               <li className="nav-item">
                 <Link to={'/message'} className="nav-link">Messages</Link>
               </li>
-             
+              
               {
                 this.props.isAuthenticated ?
 
@@ -45,15 +47,21 @@ class CustomLayout extends React.Component {
         <h2>The Wall</h2> <br/>
         <Switch>
         <Route exact path='/message' component={ MessageList } />
-              <Route path='/edit/:id' component={ MessageDetail } />
+              <Route path='/message/:id' component={ MessageDetail } />
               <Route path='/login' component={ Login } />
               <Route path='/register' component={ RegistrationForm } />
-
-             
+              
         </Switch>
       </div>
+
     </Router>
     );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.token !== null
   }
 }
 
@@ -63,4 +71,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(null,mapDispatchToProps)(CustomLayout));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(CustomLayout));
